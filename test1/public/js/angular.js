@@ -2,7 +2,11 @@ angular.module("todolist", ['ngRoute'])
     .config(function($routeProvider) {
         $routeProvider
             .when("/", {
-                templateUrl: "login.html"
+                
+                templateUrl: "login.html",
+                controller : "loginController"
+                
+
                 
             })
             .when("/new", {
@@ -18,12 +22,11 @@ angular.module("todolist", ['ngRoute'])
 
     .controller('newUser',function($scope,$http,$location){
     	$scope.save = function() {
-            $http.post("/register", $scope.user).
-                success(function(response) {
-                    $scope.check = true
-                    $scope.test = response[0]['msg']
+            $http.post("/register", $scope.user)
+                .success(function(response) {
                     $location.path('/user')
-                }).error(function(response) {
+                })
+                .error(function(response) {
                     var length = response.length;
                     var errors = [length]
                     for (var i = 0; i<length; i++) {
@@ -35,12 +38,37 @@ angular.module("todolist", ['ngRoute'])
                                 errors[i] = msg;
                         }
                     }
-                    
+
                     }
                     $scope.errors = errors;
-                });
+                })
     }
 })
+    .controller('loginController',function($scope,$http,$location){
+        $scope.passmein = function(){
+            $http.post('/login',$scope.user1)
+                .success(function(response){
+                     $location.path('/user')
+                 })
+                .error(function(response){
+                    var length = response.length;
+                    var errors = [length]
+                    for (var i = 0; i<length; i++) {
+                        var err = response[i]
+                        var msg;
+                        for(var key in err) {
+                            if(key == 'msg') {
+                                msg = err[key];
+                                errors[i] = msg;
+                        }
+                    }
+
+                    }
+                    $scope.errors = errors;
+                    
+                })
+        }
+    })
 
 
 

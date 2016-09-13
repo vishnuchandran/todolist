@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var login = require('../models/loginSchema');
+
 
 router.post("/register",function(req,res){
 	var firstName = req.body.firstName;
@@ -26,20 +28,77 @@ router.post("/register",function(req,res){
 	}
 	else {
 
-		login.firstName = firstName;
-		createUser.lastName = lastName;
-		createUser.emailId = email;
-		createUser.password = pass2;
-		createUser.save(function(err){
+		login.findOne({emailId : email},function(err,data){
+			console.log(data)
 			if(err){
-				console.log("failed")
+				console.log("failed");
+			    var message = [ { param: 'email', msg: 'Failed to create account',value: undefined }];
 			}
-			else {
-				console.log("success")
+				
+			 else {
+			 	if(data == null){
+			 		var createUser = new login;
+					createUser.firstName = firstName;
+					createUser.lastName = lastName;
+					createUser.emailId = email;
+					createUser.password = pass2;
+					createUser.save(function(err){
+					if(err){
+						console.log("failed");
+						var message = [ { param: 'email', msg: 'Failed to create account',value: undefined }];
+					}
+					else {
+						res.send("success");
+						console.log("success");
+				
+					}
+					});
+			 	}
+			 	if(data != null) {
+			 		console.log("emailid already exist");
+					var message = [ { param: 'email', msg: 'Email Id already exist',value: undefined }];
+					res.status(500).json(message);
+			 	}
+			 	
 			}
-		})
-		console.log("entered1")
+		});
 	}
+});
+
+
+router.post('/login',function(req,res){
+	var email = req.body.email;
+	var pass1 = req.body.pass1;
+
+	login.findOne({emailId : email},function(err,data){
+			console.log(data)
+			if(err){
+				console.log("failed");
+			    var message = [ { param: 'email', msg: 'Try after sometimes',value: undefined }];
+			    res.status(500).json(message);
+			}
+				
+			 else {
+			 	if(data == null){
+			 		var message = [ { param: 'email', msg: 'Invalid EmailId or Password',value: undefined }];
+			 		res.status(500).json(message);	
+			 	}
+			 	if(data != null) {
+			 		if(data.password == pass1){
+			 			res.send("success");
+			 		}
+			 		if(data.password !=pass1){
+			 			var message = [ { param: 'email', msg: 'Invalid EmailId or Password',value: undefined }];
+			 			res.status(500).json(message);
+			 		}	
+
+			 	}
+			 	
+			}
+		});
+
+
+
 });
 
 

@@ -7,7 +7,7 @@ const mongoUrl = 'mongodb://localhost/todolist';
 const routes = require('./app/routes/index');
 var expressValidator = require('express-validator');
 var expressSession = require('express-session');
-
+mongoose.Promise = global.Promise;
 mongoose.connect(mongoUrl, function(err, res){
 	if (err) {
 		console.log(err);
