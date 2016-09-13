@@ -1,4 +1,4 @@
-  
+<link rel="stylesheet" href="css/style1.css">  
 
   <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
@@ -7,8 +7,16 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#/">Home</a></li>
+            <li class="active"><a href="#/user">Home</a></li>
+            <li class="active"><a href="#/">Logout</a></li>
           </ul>
         </div>
       </div>
     </nav>
+
+<form>
+      <div class="input">
+        <input type="text" class="button" id="todolist" name="todolist" ng-model = "user.task" placeholder="Take a Note">
+        <input ng-click = "todo(user)" type="submit" class="button" id="submit" value="Done">
+      </div>
+    </form>
