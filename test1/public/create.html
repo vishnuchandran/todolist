@@ -1,0 +1,39 @@
+  <div class="login-page">
+  <div class="form">
+    <form class="login-form" name = "regform" novalidate>
+    <div style="color : red" ng-show="errors">
+      <ul style="text-align: left">
+        <li ng-repeat="x in errors">
+          {{ x }}
+        </li>
+      </ul>
+    </div>
+      <input type="text" name = "firstName" ng-model = "user.firstName" placeholder="FirstName" required/>
+      <span style="color : red" ng-show="regform.firstName.$dirty && regform.firstName.$invalid">
+      <span ng-show="regform.firstName.$error.required"> First Name is required
+      </span>
+      </span>
+
+
+      <input type="text" name = "lastName" ng-model = "user.lastName" placeholder="LastName" required/>
+      <span style="color : red" ng-show="regform.lastName.$dirty && regform.lastName.$invalid">
+      <span ng-show="regform.lastName.$error.required"> Last Name is required
+      </span>
+      </span>
+
+      <input type="email" name = "email" ng-model = "user.email" placeholder="email address" required/>
+      <span style="color:red" ng-show="regform.email.$dirty && regform.email.$invalid">
+      <span ng-show="regform.email.$error.required">Email is required.</span>
+      <span ng-show="regform.email.$error.email">Invalid email address.</span>
+      </span>
+
+
+      <input type="password" name = "pass1" ng-model = "user.pass1" placeholder="Password"/>
+      <input type="password" name = "pass2" ng-model = "user.pass2" placeholder="ConformPassword"/>
+      <span ></span>
+      <button ng-click="save(user)">create</button>
+      <p class="message">Already registered? <a href="#/">Sign In</a></p>
+    </form>
+
+      </div>
+</div>
