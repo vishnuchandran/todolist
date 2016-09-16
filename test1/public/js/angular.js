@@ -15,7 +15,14 @@ angular.module("todolist", ['ngRoute'])
                 
             })
             .when("/user",{
-            	templateUrl : "mypage.html"
+            	templateUrl : "mypage.html",
+                controller : "dataController",
+                resolve : {
+                    listall : function(tasks){
+                        return tasks.getdata();
+                    }
+
+                }
             })
 
     })
@@ -67,6 +74,47 @@ angular.module("todolist", ['ngRoute'])
                     $scope.errors = errors;
                     
                 })
+        }
+
+    })
+    .controller('dataController',function(listall,$http,$scope,$location){
+        $scope.todo = function(){
+            $http.post('/insertdata',$scope.user)
+                .success(function(response){
+                    
+                })
+                .error(function(response){
+                    alert(response)
+                })
+        }
+        $scope.list = listall.data
+        $scope.logout = function(){
+            $http.post('/logout')
+                .success(function(response){
+                    $location.path('/')
+                })
+                .error(function(response){
+                    alert(response)
+                })
+        }
+        $scope.colorCodeArray = [
+         "#339E42",
+         "#039BE5",
+         "#EF6C00",
+         "#A1887F",
+         "#607D8B",
+         "#039BE5",
+         "#009688",
+    ];
+    })
+    .service("tasks", function($http) {
+        this.getdata = function() {
+            return $http.get("/displaylist")
+                .then(function(response) {
+                    return response;
+                }, function(response) {
+                    //alert("Error finding ");
+                });
         }
     })
 

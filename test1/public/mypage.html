@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="css/style1.css">  
+<link rel="stylesheet" href="css/style1.css"> 
+<link rel="stylesheet" href="css/style2.css"> 
 
   <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
@@ -8,7 +9,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#/user">Home</a></li>
-            <li class="active"><a href="#/">Logout</a></li>
+            <li class="active" ng-click="logout()"><a href="#/user">Logout</a></li>
           </ul>
         </div>
       </div>
@@ -16,7 +17,37 @@
 
 <form>
       <div class="input">
-        <input type="text" class="button" id="todolist" name="todolist" ng-model = "user.task" placeholder="Take a Note">
-        <input ng-click = "todo(user)" type="submit" class="button" id="submit" value="Done">
+        <input type="text" class="button" id="todolist" name="todolist" ng-model = "user.task" placeholder="Take a Note"/>
+        <input ng-click = "todo(user)" type="submit" class="button" id="submit" value="Done"/>
       </div>
     </form>
+
+
+<!-- <style>
+div {
+  width: 150px;
+  height: 100px;
+  margin: 24px 0;
+  padding: 16px;
+}
+</style> -->
+<!-- <div style="color : red" ng-show="list">
+      <ul style="text-align: left">
+        <li ng-repeat="task in list track by $index">
+          {{ task }}
+        </li>
+      </ul>
+    </div> -->
+
+
+<div id="cards" ng-repeat="task in list track by $index" class="w3-card w3-yellow"><p>{{task}}</p></div>
+
+
+<!-- </div>
+  <div class='md-padding' layout="row" flex>
+     <div layout="row" flex>
+        <div class="parent" layout="column" ng-repeat="user in testdata" flex>
+            ... Your content here
+        </div>
+     </div>
+  </div> -->

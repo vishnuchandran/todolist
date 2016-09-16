@@ -29,7 +29,7 @@ router.post("/register",function(req,res){
 	else {
 
 		login.findOne({emailId : email},function(err,data){
-			console.log(data)
+			//console.log(data)
 			if(err){
 				console.log("failed");
 			    var message = [ { param: 'email', msg: 'Failed to create account',value: undefined }];
@@ -71,7 +71,7 @@ router.post('/login',function(req,res){
 	var pass1 = req.body.pass1;
 
 	login.findOne({emailId : email},function(err,data){
-			console.log(data)
+			//console.log(data)
 			if(err){
 				console.log("failed");
 			    var message = [ { param: 'email', msg: 'Try after sometimes',value: undefined }];
@@ -85,6 +85,8 @@ router.post('/login',function(req,res){
 			 	}
 			 	if(data != null) {
 			 		if(data.password == pass1){
+			 			req.session.data = data._id;
+			 			console.log(req.session.data);
 			 			res.send("success");
 			 		}
 			 		if(data.password !=pass1){
@@ -99,8 +101,76 @@ router.post('/login',function(req,res){
 
 
 
-});
+})
+router.post('/insertdata',function(req,res){
+	console.log("entered insertdata section");
+	if(!req.session.data){
+		var message = "Unautorized User";
+		res.status(401).json(message);
 
+	}
+	else {
+		if(req.body.task != null){
+		//var todolist = req.body.task;
+		login.findByIdAndUpdate(
+        req.session.data,
+        {$push: {"todolist": req.body.task}},
+        {safe: true, upsert: true, new : true},
+        function(err, data) {
+        if(err){
+        	var message = "Updating database failed";
+			res.status(401).json(message);
+        } 
+      	else{
+      		res.status(200).json("success");
+      	}
+        });
 
+		
+		
+
+	}
+	}	
+})
+
+// router.get('/user',function(req,res){
+// 	if(!req.session.data){
+// 		var message = "Unautorized User";
+// 		res.status(401).json(message);
+
+// 	}
+
+// })
+
+router.get('/displaylist',function(req,res){
+	if(!req.session.data){
+		var message = "Unautorized User";
+		res.status(401).json(message);
+
+	}
+	else {
+		login.findOne({_id : req.session.data},function(err,data){
+			if(err){
+				var message = "Unable to pull out data"
+				res.status(401).json(message);	
+			}
+			else {
+				
+				res.status(200).json(data.todolist.reverse());
+			}
+
+		})
+		
+		
+		
+
+	}	
+
+})
+
+router.post('/logout',function(req,res){
+	req.session.destroy();
+	res.status(200).send();
+})
 
 module.exports = router;
