@@ -111,25 +111,54 @@ router.post('/insertdata',function(req,res){
 	}
 	else {
 		if(req.body.task != null){
-		//var todolist = req.body.task;
-		login.findByIdAndUpdate(
-        req.session.data,
-        {$push: {"todolist": req.body.task}},
-        {safe: true, upsert: true, new : true},
-        function(err, data) {
-        if(err){
-        	var message = "Updating database failed";
-			res.status(401).json(message);
-        } 
-      	else{
-      		res.status(200).json("success");
-      	}
-        });
+			console.log(req.body);
+			//var todolist = req.body.task;
+			login.findByIdAndUpdate(
+        	req.session.data,
+        	{$push: {"todolist": req.body}},
+        	{safe: true, upsert: true, new : true},
+        	function(err, data) {
+        		if(err){
+        			var message = "Updating database failed";
+					res.status(401).json(message);
+        		} 
+      			else{
+      				console.log(data.todolist);
+      				res.status(200).json(data.todolist.reverse());
+      			}
+    		});		
+		}
+	}	
+})
 
-		
-		
+
+router.post('/delete',function(req,res){
+	console.log(req.body)
+	console.log("entered deletedata section");
+	if(!req.session.data){
+		var message = "Unautorized User";
+		res.status(401).json(message);
 
 	}
+	else {
+		if(req.body.task != null){
+			console.log(req.body);
+			//var todolist = req.body.task;
+			login.findByIdAndUpdate(
+        	req.session.data,
+        	{$pull: {"todolist": req.body}},
+        	{safe: true, upsert: true, new : true},
+        	function(err, data) {
+        		if(err){
+        			var message = "Updating database failed";
+					res.status(401).json(message);
+        		} 
+      			else{
+      				console.log(data.todolist);
+      				res.status(200).json(data.todolist.reverse());
+      			}
+    		});		
+		}
 	}	
 })
 
@@ -155,6 +184,7 @@ router.get('/displaylist',function(req,res){
 				res.status(401).json(message);	
 			}
 			else {
+				console.log("success");
 				
 				res.status(200).json(data.todolist.reverse());
 			}

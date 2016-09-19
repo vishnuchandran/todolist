@@ -15,7 +15,7 @@ angular.module("todolist", ['ngRoute'])
                 
             })
             .when("/user",{
-            	templateUrl : "mypage.html",
+                templateUrl : "mypage.html",
                 controller : "dataController",
                 resolve : {
                     listall : function(tasks){
@@ -28,7 +28,7 @@ angular.module("todolist", ['ngRoute'])
     })
 
     .controller('newUser',function($scope,$http,$location){
-    	$scope.save = function() {
+        $scope.save = function() {
             $http.post("/register", $scope.user)
                 .success(function(response) {
                     $location.path('/user')
@@ -78,15 +78,21 @@ angular.module("todolist", ['ngRoute'])
 
     })
     .controller('dataController',function(listall,$http,$scope,$location){
+        var check ;
         $scope.todo = function(){
-            $http.post('/insertdata',$scope.user)
-                .success(function(response){
-                    
-                })
-                .error(function(response){
-                    alert(response)
-                })
+            if(check == true) {
+                $http.post('/insertdata', $scope.user)
+                    .success(function(response){
+                        $scope.list = response;
+                        $scope.user.task = null;
+                        $scope.user.taskTitle = null;   
+                    })
+                    .error(function(response){
+                        alert(response)
+                    })
+            }
         }
+        // $scope.updatenote.$setUntouched();
         $scope.list = listall.data
         $scope.logout = function(){
             $http.post('/logout')
@@ -97,15 +103,45 @@ angular.module("todolist", ['ngRoute'])
                     alert(response)
                 })
         }
-        $scope.colorCodeArray = [
-         "#339E42",
-         "#039BE5",
-         "#EF6C00",
-         "#A1887F",
-         "#607D8B",
-         "#039BE5",
-         "#009688",
-    ];
+        $scope.onclick = false;
+        $scope.expand = function(){
+            $scope.onclick = !$scope.onclick;
+        }
+
+
+        $scope.delete = function($index){
+            $http.post('/delete',$scope.list[$index])
+                .success(function(response){
+                        $scope.list = response;
+                        $scope.user.task = null;
+                        $scope.user.taskTitle = null;   
+                    })
+                    .error(function(response){
+                        alert(response)
+                    })
+
+        }
+
+        $scope.checkIfEnterKeyWasPressed = function($event){
+            var keyCode = $event.which || $event.keyCode;
+            if (keyCode === 13) {
+                check = false;
+                
+                }
+            else {
+                check = true;
+            }
+            }
+
+    //     $scope.colorCodeArray = [
+    //      "#339E42",
+    //      "#039BE5",
+    //      "#EF6C00",
+    //      "#A1887F",
+    //      "#607D8B",
+    //      "#039BE5",
+    //      "#009688",
+    // ];
     })
     .service("tasks", function($http) {
         this.getdata = function() {

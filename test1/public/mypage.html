@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="css/style1.css"> 
+<!-- <link rel="stylesheet" href="css/style1.css">  -->
 <link rel="stylesheet" href="css/style2.css"> 
 
   <nav class="navbar navbar-default navbar-fixed-top">
@@ -9,18 +9,42 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#/user">Home</a></li>
-            <li class="active" ng-click="logout()"><a href="#/user">Logout</a></li>
+            <li  ng-click="logout()"><a href="#/user">Logout</a></li>
           </ul>
         </div>
       </div>
     </nav>
 
-<form>
+<!-- <form name = "updatenote">
       <div class="input">
         <input type="text" class="button" id="todolist" name="todolist" ng-model = "user.task" placeholder="Take a Note"/>
         <input ng-click = "todo(user)" type="submit" class="button" id="submit" value="Done"/>
       </div>
     </form>
+
+ -->
+
+
+<div ng-click = "expand()" class="login-page1">
+  <div class="form1">
+    <form class="login-form1" name="regform" novalidate>
+      <input ng-show = "onclick" type="text" name="todolistTitle" ng-model = "user.taskTitle" placeholder="Title"/>
+      <textarea  ng-keypress="checkIfEnterKeyWasPressed($event)" type="text" name="todolist" ng-model = "user.task" placeholder="Take a Note"></textarea>
+      <button ng-click = "todo($event,user)">Done</button>
+    </form>
+  </div>
+</div>
+
+
+<div  class="card" ng-repeat="tasks in list track by $index">
+  <div ng-click = "onclicks=!onclicks" class="container">
+    <h4><b>{{tasks.taskTitle}}</b></h4>
+    <pre>{{tasks.task}}</pre>
+    <button ng-show = "onclicks" class="btn btn-primary">Edit</button>
+    <button ng-show = "onclicks" ng-click="delete($index)" class="btn btn-primary">Delete</button>
+  </div>
+</div>
+
 
 
 <!-- <style>
@@ -39,8 +63,8 @@ div {
       </ul>
     </div> -->
 
-
-<div id="cards" ng-repeat="task in list track by $index" class="w3-card w3-yellow"><p>{{task}}</p></div>
+<!-- 
+<div id="cards" ng-repeat="task in list track by $index" class="w3-card w3-yellow"><pre>{{task}}</pre></div> -->
 
 
 <!-- </div>

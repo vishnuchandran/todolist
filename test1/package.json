@@ -9,8 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@iamadamjowett/angular-click-outside": "^2.8.3",
+    "angular": "^1.5.8",
+    "angular-clickout": "^1.0.2",
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
+    "bower": "^1.7.9",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
     "express-session": "^1.14.1",
