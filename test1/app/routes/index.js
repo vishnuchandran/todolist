@@ -185,8 +185,9 @@ router.get('/displaylist',function(req,res){
 			}
 			else {
 				console.log("success");
-				
-				res.status(200).json(data.todolist.reverse());
+				var reversedTaskArray = data.todolist.reverse();
+				console.log(reversedTaskArray[0]);
+				res.status(200).json(reversedTaskArray);
 			}
 
 		})
@@ -202,5 +203,55 @@ router.post('/logout',function(req,res){
 	req.session.destroy();
 	res.status(200).send();
 })
+
+router.post('/edit',function(req,res){
+	console.log("entered edit section")
+
+	if(!req.session.data){
+		var message = "Unautorized User";
+		res.status(401).json(message);
+
+	}
+	else {
+		if(req.body.task != null){
+			var editeddata =  {task: req.body.taskTitle, taskTitle: req.body.taskTitle};
+			var index = req.body.index;
+			console.log(req.body);
+			login.findOne({_id:req.session.data},function(err,data){
+				if (err) {
+					var message = "Try after sometime";
+					console.log(message);
+					res.status(401).json(message);
+
+				}
+				else{
+
+					var todolist = data.todolist.reverse();
+					todolist[req.body.index] = editeddata;
+					console.log(todolist);
+					var temp = todolist.reverse();
+					console.log(temp)
+					login.update({
+        			"_id": req.session.data},
+        			{$set: {"todolist": temp}},
+        			{new : true},
+        			function(err,document) {
+        				if(err){
+        					var message = "Updating database failed";
+							res.status(401).json(message);
+        				} 
+      					else{
+      						console.log("edited success");
+      						res.status(200).json(data.todolist.reverse());
+
+      					}
+    				});	
+				}
+			})		
+		}
+	}
+})
+
+
 
 module.exports = router;

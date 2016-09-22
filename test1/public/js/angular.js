@@ -1,4 +1,4 @@
-angular.module("todolist", ['ngRoute'])
+angular.module("todolist", ['ngRoute', 'ngMaterial'])
     .config(function($routeProvider) {
         $routeProvider
             .when("/", {
@@ -77,10 +77,9 @@ angular.module("todolist", ['ngRoute'])
         }
 
     })
-    .controller('dataController',function(listall,$http,$scope,$location){
+    .controller('dataController',function(listall,$http,$scope,$location,$mdDialog){
         var check ;
-        $scope.todo = function(){
-            if(check == true) {
+        $scope.todo = function(){  
                 $http.post('/insertdata', $scope.user)
                     .success(function(response){
                         $scope.list = response;
@@ -90,7 +89,7 @@ angular.module("todolist", ['ngRoute'])
                     .error(function(response){
                         alert(response)
                     })
-            }
+            
         }
         // $scope.updatenote.$setUntouched();
         $scope.list = listall.data
@@ -105,7 +104,7 @@ angular.module("todolist", ['ngRoute'])
         }
         $scope.onclick = false;
         $scope.expand = function(){
-            $scope.onclick = !$scope.onclick;
+            $scope.onclick = true;
         }
 
 
@@ -122,16 +121,51 @@ angular.module("todolist", ['ngRoute'])
 
         }
 
-        $scope.checkIfEnterKeyWasPressed = function($event){
-            var keyCode = $event.which || $event.keyCode;
-            if (keyCode === 13) {
-                check = false;
+        $scope.edit = function($event,data,$index) {
+            // Appending dialog to document.body to cover sidenav in docs app
+            // Modal dialogs should fully cover application
+            // to prevent interaction outside of dialog
+            $mdDialog.show({
+                locals:{name:data,
+                        index : $index},
+                controller: ['$scope','name','index',function($scope,name,index){
+                    $scope.user1 = name;
+                    $scope.user1.index = index;
+                    $scope.todo1 = function(){
+                        $http.post('/edit',$scope.user1)
+                        .success(function(response){
+                            $scope.list = response.data;
+                            $mdDialog.hide(); 
+                      
+                    })
+                    .error(function(response){
+                        $mdDialog.hide(response);
+                    })
+                    
+                    }  
+                }],
+                templateUrl: 'popup.html',
+                parent: angular.element(document.body),
+                targetEvent: $event,
+                preserveScope: true,
+                clickOutsideToClose:true,
+            // fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+            })
+        }
+
+        
+            
+
+        // $scope.checkIfEnterKeyWasPressed = function($event){
+        //     var keyCode = $event.which || $event.keyCode;
+        //     if (keyCode === 13) {
+        //         check = false;
                 
-                }
-            else {
-                check = true;
-            }
-            }
+        //         }
+        //     else {
+        //         check = true;
+        //     }
+        //     }
 
     //     $scope.colorCodeArray = [
     //      "#339E42",

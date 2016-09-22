@@ -21,6 +21,7 @@ var registerSchema = new Schema({
 		required : true
 	},
 	todolist : {
+		_id : Number,
 		type : Array
 	}
 

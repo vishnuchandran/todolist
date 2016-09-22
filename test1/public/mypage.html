@@ -29,18 +29,19 @@
   <div class="form1">
     <form class="login-form1" name="regform" novalidate>
       <input ng-show = "onclick" type="text" name="todolistTitle" ng-model = "user.taskTitle" placeholder="Title"/>
-      <textarea  ng-keypress="checkIfEnterKeyWasPressed($event)" type="text" name="todolist" ng-model = "user.task" placeholder="Take a Note"></textarea>
-      <button ng-click = "todo($event,user)">Done</button>
+      <textarea type="text" name="todolist" ng-model = "user.task" placeholder="Take a Note"></textarea>
+      <button  ng-click = "todo(user)">Done</button>
+      {{$scope.user1.index}}
     </form>
   </div>
 </div>
 
 
-<div  class="card" ng-repeat="tasks in list track by $index">
+<div  class="card1" ng-repeat="tasks in list track by $index">
   <div ng-click = "onclicks=!onclicks" class="container">
     <h4><b>{{tasks.taskTitle}}</b></h4>
     <pre>{{tasks.task}}</pre>
-    <button ng-show = "onclicks" class="btn btn-primary">Edit</button>
+    <button ng-show = "onclicks" ng-click = "edit($event,list[$index],$index)" class="btn btn-primary">Edit</button>
     <button ng-show = "onclicks" ng-click="delete($index)" class="btn btn-primary">Delete</button>
   </div>
 </div>
