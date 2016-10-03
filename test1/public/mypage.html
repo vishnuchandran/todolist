@@ -8,7 +8,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#/user">Home</a></li>
+            <li ><a href="#/user">Home</a></li>
             <li  ng-click="logout()"><a href="#/user">Logout</a></li>
           </ul>
         </div>
@@ -27,22 +27,23 @@
 
 <div ng-click = "expand()" class="login-page1">
   <div class="form1">
-    <form class="login-form1" name="regform" novalidate>
+    <form name="regform" novalidate>
       <input ng-show = "onclick" type="text" name="todolistTitle" ng-model = "user.taskTitle" placeholder="Title"/>
       <textarea type="text" name="todolist" ng-model = "user.task" placeholder="Take a Note"></textarea>
       <button  ng-click = "todo(user)">Done</button>
-      {{$scope.user1.index}}
     </form>
   </div>
 </div>
 
 
-<div  class="card1" ng-repeat="tasks in list track by $index">
-  <div ng-click = "onclicks=!onclicks" class="container">
+<div  class="card" ng-repeat="tasks in list track by $index">
+  <div ng-mouseenter = "onclicks=true" ng-mouseleave="onclicks=false" class="container">
     <h4><b>{{tasks.taskTitle}}</b></h4>
-    <pre>{{tasks.task}}</pre>
-    <button ng-show = "onclicks" ng-click = "edit($event,list[$index],$index)" class="btn btn-primary">Edit</button>
-    <button ng-show = "onclicks" ng-click="delete($index)" class="btn btn-primary">Delete</button>
+    <pre class = "breakline">{{tasks.task}}</pre>
+    <button ng-show = "onclicks" ng-click = "edit($event,$index)"> <span class = "glyphicon glyphicon-pencil"></span></button>
+    <button class = "deleteButton" ng-show = "onclicks" ng-click="delete($index)"> 
+    <span class = "glyphicon glyphicon-trash"></span>
+    </button>
   </div>
 </div>
 

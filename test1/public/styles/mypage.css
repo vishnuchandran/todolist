@@ -1,0 +1,241 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+html,
+body {
+  background: #F8A434;
+}
+
+.login-page1 {
+  max-width: 600px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+
+.form1 {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 600px;
+  margin: auto;
+  padding: 15px;
+  /*text-align: center;*/
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.form1 textarea {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 0px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.form1 input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 0px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.form1 button {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  outline: 0;
+  background: #FFFFFF;
+  width: 10%;
+  border: 0;
+  padding: 0px;
+  color: #000000;
+  font-size: 12px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+.form1 button:hover,
+.form button:active,
+.form button:focus {
+  background: #ebebe0;
+}
+
+
+/*#cards{
+  width: 200px;
+  height: 100px;
+  margin: 24px 10px;
+  padding: 16px;
+  display: inline-block;
+}*/
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  margin: 24px 10px;
+  padding: 16px;
+  width: auto;
+  text-align: left;
+  background: #FFFFFF;
+  display: inline-block;
+}
+
+.card1:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.breakline {
+  white-space: normal;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.container button {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  outline: 0;
+  background: #FFFFFF;
+  background-color: rgba(0, 0, 0, 0);
+  width: 10%;
+  border: 0;
+  padding: 5px;
+  color: #000000;
+  font-size: 12px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+.container button:hover,
+.container button:active,
+.container button:focus {
+  background: #d6d6c2;
+}
+
+body {
+  background: #F8A434;
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+}
+
+pre {
+  border: 0;
+  background-color: #FFFFFF;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+}
+
+.login-page2 {
+  width: 600px;
+  padding: 0% 0% 0%;
+  /*margin: auto;*/
+}
+
+.form2 {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 600px;
+  /*margin: 0 auto 100px;*/
+  padding: 15px;
+  /*text-align: center;*/
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.form2 textarea {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 0px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.form2 input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 0px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.form2 button {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  outline: 0;
+  background: #FFFFFF;
+  width: 10%;
+  border: 0;
+  padding: 5px;
+  color: #000000;
+  font-size: 12px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+.form2 button:hover,
+.form2 button:active,
+.form2 button:focus {
+  background: #f2f2f2;
+}
+
+[ng-drop].drag-enter {
+  border: solid 15px #f2f2f2;
+}
+
+[ng-drag].drag-over {
+  background: white;
+}
+  .navbar-center
+{
+    position: absolute;
+    width: 100%;
+    text-align: right;
+    margin: auto;
+    padding-top: 8px;
+}
+/*.navbar-form
+.form-control {
+    margin: 0 400px 0 100px;
+    width: 500px;
+
+}*/
+
+/*.input-group { 
+    position: relative; 
+}
+
+/* style icon */
+/*.input-group .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}*/
+
+/* align icon */
+/*.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+ add padding  
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+*/
+.input-group-addon:last-child {
+    background-color: rgba(0,0,0,0);
+}

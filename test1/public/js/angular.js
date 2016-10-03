@@ -121,22 +121,23 @@ angular.module("todolist", ['ngRoute', 'ngMaterial'])
 
         }
 
-        $scope.edit = function($event,data,$index) {
+        $scope.edit = function($event,$index) {
             // Appending dialog to document.body to cover sidenav in docs app
             // Modal dialogs should fully cover application
             // to prevent interaction outside of dialog
+            
+            var data = angular.copy($scope.list[$index]);
             $mdDialog.show({
-                locals:{name:data,
+                locals:{name: data,
                         index : $index},
-                controller: ['$scope','name','index',function($scope,name,index){
+                controller: ['$scope','name','index',function($scope, name,index){
                     $scope.user1 = name;
                     $scope.user1.index = index;
+                    console.log(name, index)
                     $scope.todo1 = function(){
                         $http.post('/edit',$scope.user1)
                         .success(function(response){
-                            $scope.list = response.data;
-                            $mdDialog.hide(); 
-                      
+                            $mdDialog.hide(response); 
                     })
                     .error(function(response){
                         $mdDialog.hide(response);
@@ -151,6 +152,11 @@ angular.module("todolist", ['ngRoute', 'ngMaterial'])
                 clickOutsideToClose:true,
             // fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
             })
+            .then(function(answer) {
+            $scope.list = answer
+            }, function() {
+    
+            });
         }
 
         

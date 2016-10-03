@@ -1,57 +1,49 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="todolist" >
-  <head>
-    <meta charset="UTF-8">
-    <title>Login Form</title>
+<html lang="en" ng-app="todolist">
+<!-- <base href="/"> -->
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome</title>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+  <script src="../bower_components/angular/angular.js"></script>
+  <script src="../bower_components/angular-jquery/dist/jquery.js"></script>
+  <script src="../bower_components/angular-material/angular-material.js"></script>
+  <script src="../bower_components/angular-animate/angular-animate.js"></script>
+  <script src="../bower_components/angular-aria/angular-aria.js"></script>
+  <script src="../bower_components/ngDraggable/ngDraggable.js"></script>
+  <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 
+  <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css">
+  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/font-awesome.css">
+  <link rel="stylesheet" href="styles/index.css">
+  
+  <script src="/app.js"></script>
+  <script src="/core/index.js"></script>
+  <script src="/core/router/router.service.js"></script>
+  <script src="/sections/index.js"></script>
+  <script src="/sections/login/index.js"></script>
+  <script src="/sections/login/login.service.js"></script>
+  <script src="/sections/login/login.controller.js"></script>
+  <script src="/sections/registration/index.js"></script>
+  <script src="/sections/registration/registration.service.js"></script>
+  <script src="/sections/registration/registration.controller.js"></script>
+  <script src="/sections/tasks/index.js"></script>
+  <script src="/sections/tasks/tasks.service.js"></script>
+  <script src="/sections/tasks/tasks.controller.js"></script>
+</head>
 
-    <!-- Angular Material Javascript now available via Google CDN; version 1.0.7 used here -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.js"></script>
-     <!-- Angular Material CSS now available via Google CDN; version 1.0.7 used here -->
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
-
-
-        <link rel="stylesheet" href="css/style.css">
-        
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> 
-        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-
-        <script src="/js/angular.js"></script>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-
-
-  </head>
-  <style>
-    body {
-      background-color: #5bc35b;
-      }
-  </style>
-  <body>
-
+<body>
   <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <div class="navbar-brand" href="#/">To Do List</div>
-        </div>
-        
-    </nav>
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <div class="navbar-brand" href="">To Do List</div>
+      </div>
+  </nav>
 
+  <!-- Dynamically render templates -->
+  <div ui-view=""></div>
+</body>
 
-
-
-
-    <!-- Dynamically render templates -->
-   <div ng-view></div>
-
-
-  </body>
 </html>
